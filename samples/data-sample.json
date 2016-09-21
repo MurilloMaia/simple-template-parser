@@ -1,0 +1,10 @@
+[
+    {
+        "KEY": "VALUE",
+        "OTHER_KEY": "VALUE_OTHER_KEY"
+    },
+    {
+        "KEY": "OTHER_VALUE",
+        "OTHER_KEY": "OTHER_VALUE_OTHER_KEY"
+    }
+]
