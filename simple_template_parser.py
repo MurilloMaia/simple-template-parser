@@ -24,6 +24,8 @@ def main():
             Template format:
             -----------------------------------
             ${KEY}
+            some stuffs here
+            ${OTHER_KEY}
             -----------------------------------
 
 
@@ -45,10 +47,13 @@ def main():
 
             Expected outputs:
             -----------------------------------
-            VALUE
+            VALUE_KEY
+            some stuffs here
+            VALUE_OTHER_KEY
             -----------------------------------
-            OTHER_VALUE
-            -----------------------------------
+            OTHER_VALUE_KEY
+            some stuffs here
+            OTHER_VALUE_OTHER_KEY
 
         ''')
         )
