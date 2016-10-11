@@ -55,6 +55,16 @@ def main():
             some stuffs here
             OTHER_VALUE_OTHER_KEY
 
+            Command Samples:
+                JSON
+                ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json
+                
+                CSV
+                ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.csv -dt csv
+
+                WITH OUTPUT
+                ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o sample/output-sample.txt
+
         ''')
         )
 
