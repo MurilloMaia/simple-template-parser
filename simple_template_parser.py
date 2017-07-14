@@ -26,6 +26,7 @@ def main():
             ${KEY}
             some stuffs here
             ${OTHER_KEY}
+
             -----------------------------------
 
 
@@ -50,20 +51,67 @@ def main():
             VALUE_KEY
             some stuffs here
             VALUE_OTHER_KEY
-            -----------------------------------
+
             OTHER_VALUE_KEY
             some stuffs here
             OTHER_VALUE_OTHER_KEY
 
+            -----------------------------------
+
             Command Samples:
+
                 JSON
                 ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json
-                
+
+                -----------------------------------
+
                 CSV
                 ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.csv -dt csv
 
+                -----------------------------------
+
                 WITH OUTPUT
-                ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o sample/output-sample.txt
+                ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/output-samples.txt
+
+                # IN THIS EXAMPLE THE COMMAND WILL CREATE A FILE WITH ALL ENTRIES
+
+                # FILE:
+                #   samples/output-samples.txt
+                # CONTENT:
+                #   VALUE
+                #   some stuffs here
+                #   VALUE_OTHER_KEY
+                #   
+                #   OTHER_VALUE
+                #   some stuffs here
+                #   OTHER_VALUE_OTHER_KEY
+                #   
+
+                -----------------------------------
+
+                WITH OUTPUT FILE PATTERN
+                ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/ -ofp 'output-samples-${KEY}.txt'
+
+                # IN THIS EXAMPLE THE COMMAND WILL CREATE A FILE FOR EACH ENTRY
+
+                # FILE:
+                #   samples/output-samples-VALUE.txt
+                # CONTENT:
+                #   VALUE
+                #   some stuffs here
+                #   VALUE_OTHER_KEY
+                #
+
+                # FILE:
+                #   samples/output-samples-OTHER_VALUE.txt
+                # CONTENT:
+                #   OTHER_VALUE
+                #   some stuffs here
+                #   OTHER_VALUE_OTHER_KEY
+                #
+
+
+                -----------------------------------
 
         ''')
         )
@@ -77,6 +125,7 @@ def main():
     parser.add_argument('-iter', '--iterate', help='When iterate over data file, needs to press a key to continue', action='store_true')
     parser.add_argument('-o', '--output', help='path to output file, prints the output only in the file')
     parser.add_argument('-oe', '--output-encoding', help='output file encoding, default=UTF-8', default='UTF-8')
+    parser.add_argument('-ofp', '--output-file-pattern', help='output file pattern, will generate many files as entries. Outputs on path and parse the pattern with data tags')
 
     args = parser.parse_args()
     
@@ -84,14 +133,21 @@ def main():
 
     data = parseData(args)
 
-    if args.output:
-        global output
+    output = None
+
+    if args.output and not args.output_file_pattern:
         output = codecs.open(args.output, WRITE, args.output_encoding)
 
     for p in data:
-        write(process_template(template, **p), args.iterate)
-
-    printSuccess()
+        if args.output_file_pattern:
+            filename = Template(args.output_file_pattern).substitute(**p)
+            if args.output:
+                path = ''.join([args.output,'/'])
+            else:
+                path = './'
+            output = codecs.open(''.join([path, filename]), WRITE, args.output_encoding)
+            
+        write(output, process_template(template, **p), args.iterate)
 
 def parseData(args):
     parsers = {
@@ -116,19 +172,17 @@ def parseCsv(args, file):
 
     return data
 
-def write(parsed_content, iterate):
+def write(output, parsed_content, iterate):
     if output:
-        output.write(DIV)
-        output.write('\n')
         output.write(parsed_content)
         output.write('\n')
 
     else:
-        print DIV
         print parsed_content
-        if iterate:
-            print 'press any key to continue.'
-            raw_input();
+
+    if iterate:
+        print 'press any key to continue.'
+        raw_input();
 
 def printSuccess():
     print Template(textwrap.dedent('''\
