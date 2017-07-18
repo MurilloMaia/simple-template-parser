@@ -5,6 +5,10 @@ import csv
 import codecs
 import argparse
 import textwrap
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 from string import Template
 
@@ -33,16 +37,24 @@ def main():
             JSON file format:
             -----------------------------------
             [
-                {"KEY": "VALUE"},
-                {"KEY": "OTHER_VALUE"}
+                {
+                    "KEY": "VALUE",
+                    "OTHER_KEY": "VALUE_OTHER_KEY"
+                },
+                {
+                    "KEY": "OTHER_VALUE",
+                    "OTHER_KEY": "OTHER_VALUE_OTHER_KEY"
+                }
             ]
+
             -----------------------------------
 
             CSV file format:
             -----------------------------------
-            KEY\tKEY2
-            VALUE_KEY\tVALUE_KEY2
-            OTHER_VALUE_KEY\tOTHER_VALUE_KEY2
+            KEY\tOTHER_KEY
+            VALUE_KEY\tVALUE_OTHER_KEY
+            OTHER_VALUE_KEY\tOTHER_VALUE_OTHER_KEY
+
             -----------------------------------
 
 
@@ -92,7 +104,7 @@ def main():
                 WITH OUTPUT FILE PATTERN
                 ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/ -ofp 'output-samples-${KEY}.txt'
 
-                # IN THIS EXAMPLE THE COMMAND WILL CREATE A FILE FOR EACH ENTRY
+                # IN THIS EXAMPLE THE COMMAND WILL CREATE A FILE FOR EACH ENTRY ON THE OUPUT FILE PATH, REPLACING THE PATTERN WITH DATA KEYS
 
                 # FILE:
                 #   samples/output-samples-VALUE.txt

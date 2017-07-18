@@ -1,100 +1,12 @@
 # simple-template-parser
 
+###Script that parse a template file and generate the output with data of data file.
+
+```
 ./simple_template_parser.py -h
 usage:  [-h] -t TEMPLATE [-te TEMPLATE_ENCODING] -d DATA [-de DATA_ENCODING]
         [-dt DATA_TYPE] [-dtcsvd DATA_TYPE_CSV_DELIMITER] [-iter] [-o OUTPUT]
         [-oe OUTPUT_ENCODING] [-ofp OUTPUT_FILE_PATTERN]
-
-Script that parse a template file and generate the output with data of data file.
-
-Template format:
------------------------------------
-${KEY}
-some stuffs here
-${OTHER_KEY}
-
------------------------------------
-
-JSON file format:
------------------------------------
-[
-    {"KEY": "VALUE"},
-    {"KEY": "OTHER_VALUE"}
-]
------------------------------------
-
-CSV file format:
------------------------------------
-KEY KEY2
-VALUE_KEY VALUE_KEY2
-OTHER_VALUE_KEY OTHER_VALUE_KEY2
------------------------------------
-
-Expected outputs:
------------------------------------
-VALUE_KEY
-some stuffs here
-VALUE_OTHER_KEY
-
-OTHER_VALUE_KEY
-some stuffs here
-OTHER_VALUE_OTHER_KEY
-
------------------------------------
-
-Command Samples:
-
-    JSON
-    ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json
-
-    -----------------------------------
-
-    CSV
-    ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.csv -dt csv
-
-    -----------------------------------
-
-    WITH OUTPUT
-    ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/output-samples.txt
-
-    # IN THIS EXAMPLE THE COMMAND WILL CREATE A FILE WITH ALL ENTRIES
-
-    # FILE:
-    #   samples/output-samples.txt
-    # CONTENT:
-    #   VALUE
-    #   some stuffs here
-    #   VALUE_OTHER_KEY
-    #   
-    #   OTHER_VALUE
-    #   some stuffs here
-    #   OTHER_VALUE_OTHER_KEY
-    #   
-
-    -----------------------------------
-
-    WITH OUTPUT FILE PATTERN
-    ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/ -ofp 'output-samples-${KEY}.txt'
-
-    # IN THIS EXAMPLE THE COMMAND WILL CREATE A FILE FOR EACH ENTRY
-
-    # FILE:
-    #   samples/output-samples-VALUE.txt
-    # CONTENT:
-    #   VALUE
-    #   some stuffs here
-    #   VALUE_OTHER_KEY
-    #
-
-    # FILE:
-    #   samples/output-samples-OTHER_VALUE.txt
-    # CONTENT:
-    #   OTHER_VALUE
-    #   some stuffs here
-    #   OTHER_VALUE_OTHER_KEY
-    #
-
-    -----------------------------------
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -121,3 +33,117 @@ optional arguments:
                         output file pattern, will generate many files as
                         entries. Outputs on path and parse the pattern with
                         data tags
+```
+
+
+##Template
+```
+${KEY}
+some stuffs here
+${OTHER_KEY}
+
+```
+
+##JSON
+```
+[
+    {
+        "KEY": "VALUE",
+        "OTHER_KEY": "VALUE_OTHER_KEY"
+    },
+    {
+        "KEY": "OTHER_VALUE",
+        "OTHER_KEY": "OTHER_VALUE_OTHER_KEY"
+    }
+]
+
+```
+
+##CSV
+```
+KEY	OTHER_KEY
+VALUE_KEY	VALUE_OTHER_KEY
+OTHER_VALUE_KEY	OTHER_VALUE_OTHER_KEY
+
+```
+
+##Expected output
+```
+VALUE_KEY
+some stuffs here
+VALUE_OTHER_KEY
+
+OTHER_VALUE_KEY
+some stuffs here
+OTHER_VALUE_OTHER_KEY
+
+```
+
+
+##Example
+
+####1 - JSON
+```
+./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json
+```
+####2 - CSV
+```
+./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.csv -dt csv
+```
+####3 - JSON WITH OUTPUT
+```
+    ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/output-samples.txt
+```
+
+####In this example the command will create a file with all entries.
+
+#####3.1 - Output file:
+```
+samples/output-samples.txt
+```
+
+#####3.2 - Content file:
+```
+VALUE_KEY
+some stuffs here
+VALUE_OTHER_KEY
+
+OTHER_VALUE_KEY
+some stuffs here
+OTHER_VALUE_OTHER_KEY
+
+```
+
+####4 - JSON WITH OUTPUT FILE PATTERN
+```
+./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/ -ofp 'output-samples-${KEY}.txt'
+```
+####In this example the command will create a file for each entry on the ouput file path, replacing the pattern with data keys.
+
+####4.1 - Files:
+
+#####4.1.1 - Output file:
+```
+samples/output-samples-VALUE.txt
+```
+
+#####4.1.2 - Content file:
+```
+VALUE_KEY
+some stuffs here
+VALUE_OTHER_KEY
+
+```
+
+#####4.2.1 - Output file:
+```
+samples/output-samples-OTHER_VALUE.txt
+```
+
+#####4.2.2 - Content file:
+```
+OTHER_VALUE_KEY
+some stuffs here
+OTHER_VALUE_OTHER_KEY
+
+```
