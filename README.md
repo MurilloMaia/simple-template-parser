@@ -1,6 +1,6 @@
 # simple-template-parser
 
-### Script that parse a template file and generate the output with data of data file.
+### This template parser replace tags on template with provided data and generate multi-outputs.
 
 ```
 ./simple_template_parser.py -h
@@ -36,7 +36,7 @@ optional arguments:
 ```
 
 
-##Template
+## Template
 ```
 ${KEY}
 some stuffs here
@@ -44,7 +44,7 @@ ${OTHER_KEY}
 
 ```
 
-##JSON
+## JSON
 ```
 [
     {
@@ -59,7 +59,7 @@ ${OTHER_KEY}
 
 ```
 
-##CSV
+## CSV
 ```
 KEY	OTHER_KEY
 VALUE_KEY	VALUE_OTHER_KEY
@@ -67,7 +67,7 @@ OTHER_VALUE_KEY	OTHER_VALUE_OTHER_KEY
 
 ```
 
-##Expected output
+## Expected output
 ```
 VALUE_KEY
 some stuffs here
@@ -80,29 +80,29 @@ OTHER_VALUE_OTHER_KEY
 ```
 
 
-##Example
+## Example
 
-####1 - JSON
+#### 1 - JSON
 ```
 ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json
 ```
-####2 - CSV
+#### 2 - CSV
 ```
 ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.csv -dt csv
 ```
-####3 - JSON WITH OUTPUT
+#### 3 - JSON WITH OUTPUT
 ```
     ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/output-samples.txt
 ```
 
-####In this example the command will create a file with all entries.
+#### In this example the command will create a file with all entries.
 
-#####3.1 - Output file:
+##### 3.1 - Output file:
 ```
 samples/output-samples.txt
 ```
 
-#####3.2 - Content file:
+##### 3.2 - Content file:
 ```
 VALUE_KEY
 some stuffs here
@@ -114,20 +114,20 @@ OTHER_VALUE_OTHER_KEY
 
 ```
 
-####4 - JSON WITH OUTPUT FILE PATTERN
+#### 4 - JSON WITH OUTPUT FILE PATTERN
 ```
 ./simple_template_parser.py -t samples/template-sample.txt -d samples/data-sample.json -o samples/ -ofp 'output-samples-${KEY}.txt'
 ```
-####In this example the command will create a file for each entry on the ouput file path, replacing the pattern with data keys.
+#### In this example the command will create a file for each entry on the ouput file path, replacing the pattern with data keys.
 
-####4.1 - Files:
+#### 4.1 - Files:
 
-#####4.1.1 - Output file:
+##### 4.1.1 - Output file:
 ```
 samples/output-samples-VALUE.txt
 ```
 
-#####4.1.2 - Content file:
+##### 4.1.2 - Content file:
 ```
 VALUE_KEY
 some stuffs here
@@ -135,12 +135,12 @@ VALUE_OTHER_KEY
 
 ```
 
-#####4.2.1 - Output file:
+##### 4.2.1 - Output file:
 ```
 samples/output-samples-OTHER_VALUE.txt
 ```
 
-#####4.2.2 - Content file:
+##### 4.2.2 - Content file:
 ```
 OTHER_VALUE_KEY
 some stuffs here
