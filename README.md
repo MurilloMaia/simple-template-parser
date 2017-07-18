@@ -1,6 +1,6 @@
 # simple-template-parser
 
-###Script that parse a template file and generate the output with data of data file.
+### Script that parse a template file and generate the output with data of data file.
 
 ```
 ./simple_template_parser.py -h
