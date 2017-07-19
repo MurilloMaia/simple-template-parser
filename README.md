@@ -1,4 +1,4 @@
-# simple-template-parser
+# [simple-template-parser](simple_template_parser.py)
 
 ### This template parser replace tags on template with provided data and generate multi-outputs.
 
@@ -36,7 +36,8 @@ optional arguments:
 ```
 
 
-## Template
+## [Template](samples/template-sample.txt)
+[samples/template-sample.txt](samples/template-sample.txt)
 ```
 ${KEY}
 some stuffs here
@@ -44,7 +45,8 @@ ${OTHER_KEY}
 
 ```
 
-## JSON
+## [JSON](samples/data-sample.json)
+[samples/data-samples.json](samples/data-sample.json)
 ```
 [
     {
@@ -59,7 +61,8 @@ ${OTHER_KEY}
 
 ```
 
-## CSV
+## [CSV](samples/data-sample.csv)
+[samples/data-samples.csv](samples/data-sample.csv)
 ```
 KEY	OTHER_KEY
 VALUE_KEY	VALUE_OTHER_KEY
@@ -67,7 +70,10 @@ OTHER_VALUE_KEY	OTHER_VALUE_OTHER_KEY
 
 ```
 
-## Expected output
+## [Expected output](samples/output-samples.txt)
+
+[samples/output-samples.txt](samples/output-samples.txt)
+
 ```
 VALUE_KEY
 some stuffs here
@@ -98,9 +104,7 @@ OTHER_VALUE_OTHER_KEY
 #### In this example the command will create a file with all entries.
 
 ##### 3.1 - Output file:
-```
-samples/output-samples.txt
-```
+[samples/output-samples.txt](samples/output-samples.txt)
 
 ##### 3.2 - Content file:
 ```
@@ -123,9 +127,7 @@ OTHER_VALUE_OTHER_KEY
 #### 4.1 - Files:
 
 ##### 4.1.1 - Output file:
-```
-samples/output-samples-VALUE.txt
-```
+[samples/output-samples-VALUE.txt](samples/output-samples-VALUE.txt)
 
 ##### 4.1.2 - Content file:
 ```
@@ -136,9 +138,7 @@ VALUE_OTHER_KEY
 ```
 
 ##### 4.2.1 - Output file:
-```
-samples/output-samples-OTHER_VALUE.txt
-```
+[samples/output-samples-OTHER_VALUE.txt]([samples/output-samples-OTHER_VALUE.txt)
 
 ##### 4.2.2 - Content file:
 ```
