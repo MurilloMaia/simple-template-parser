@@ -61,7 +61,6 @@ ${OTHER_KEY}
         "OTHER_KEY": "OTHER_VALUE_OTHER_KEY"
     }
 ]
-
 ```
 
 ## [CSV](samples/data-sample.csv)
@@ -190,6 +189,7 @@ OTHER_VALUE_OTHER_KEY
 ${KEY}
 some stuffs here
 ${OTHER_KEY}
+
 ```
 
 [samples/template-other-sample.txt](samples/template-other-sample.txt)
@@ -197,7 +197,6 @@ ${OTHER_KEY}
 -------------HERE-IS-OTHER-SAMPLE-------------
 ${KEY} + ${OTHER_KEY}
 ----------------------------------------------
-
 ```
 [samples/template-another-sample.txt](samples/template-another-sample.txt)
 ```txt
@@ -221,7 +220,6 @@ VALUE
 some stuffs here
 VALUE_OTHER_KEY
 
-
 -------------HERE-IS-OTHER-SAMPLE-------------
 VALUE + VALUE_OTHER_KEY
 ----------------------------------------------
@@ -232,7 +230,6 @@ VALUE + VALUE_OTHER_KEY
 OTHER_VALUE
 some stuffs here
 OTHER_VALUE_OTHER_KEY
-
 
 ----------------------------------------------
                 ANOTHER-SAMPLE                

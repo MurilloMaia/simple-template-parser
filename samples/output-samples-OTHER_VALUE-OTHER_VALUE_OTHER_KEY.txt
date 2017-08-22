@@ -2,7 +2,6 @@ OTHER_VALUE
 some stuffs here
 OTHER_VALUE_OTHER_KEY
 
-
 ----------------------------------------------
                 ANOTHER-SAMPLE                
 ----------------------------------------------
