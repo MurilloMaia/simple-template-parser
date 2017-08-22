@@ -128,17 +128,20 @@ def main():
         ''')
         )
 
-    parser.add_argument('-t', '--template', help='template file to process, with keys to replace the value')
-    parser.add_argument('-tft', '--template-file-tag', help='tag on data with the path to a template file to process')
-    parser.add_argument('-te', '--template-encoding', help='template file encoding, default=UTF-8', default='UTF-8')
     parser.add_argument('-d', '--data', help='data file to process, with a json array', required=True)
     parser.add_argument('-de', '--data-encoding', help='data file encoding, default=UTF-8', default='UTF-8')
     parser.add_argument('-dt', '--data-type', help='data file type, defaul=json', default='json')
-    parser.add_argument('-dtcsvd', '--data-type-csv-delimiter', help='csv data type delimiter, default=\\t', default='\t')
-    parser.add_argument('-iter', '--iterate', help='When iterate over data file, needs to press a key to continue', action='store_true')
+    parser.add_argument('-dtcsvd', '--data-type-csv-delimiter', help='csv data type delimiter, default=,', default=',')
+
+    parser.add_argument('-t', '--template', help='template file to process, with keys to replace the value')
+    parser.add_argument('-te', '--template-encoding', help='template file encoding, default=UTF-8', default='UTF-8')
+    parser.add_argument('-tft', '--template-file-tag', help='tag on data with the path to a template file to process')
+
     parser.add_argument('-o', '--output', help='path to output file, prints the output only in the file')
     parser.add_argument('-oe', '--output-encoding', help='output file encoding, default=UTF-8', default='UTF-8')
     parser.add_argument('-ofp', '--output-file-pattern', help='output file pattern, will generate many files as entries. Outputs on path and parse the pattern with data tags')
+
+    parser.add_argument('-iter', '--iterate', help='When iterate over data file, needs to press a key to continue', action='store_true')
 
     args = parser.parse_args()
     
@@ -146,6 +149,7 @@ def main():
     data = parseData(args)
 
     template = None
+    
     if args.template and not args.template_file_tag:
         template = Template(codecs.open(args.template, READ, args.template_encoding).read())
 

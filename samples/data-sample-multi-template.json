@@ -1,0 +1,20 @@
+[
+    {
+        "KEY": "VALUE",
+        "OTHER_KEY": "VALUE_OTHER_KEY",
+        "TEMPLATE_FILES":
+        	[
+        		"samples/template-sample.txt",
+        		"samples/template-other-sample.txt"
+        	]
+    },
+    {
+        "KEY": "OTHER_VALUE",
+        "OTHER_KEY": "OTHER_VALUE_OTHER_KEY",
+        "TEMPLATE_FILES":
+        	[
+        		"samples/template-sample.txt",
+        		"samples/template-another-sample.txt"
+        	]
+    }
+]
