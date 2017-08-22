@@ -128,7 +128,8 @@ def main():
         ''')
         )
 
-    parser.add_argument('-t', '--template', help='template file to process, with keys to replace the value', required=True)
+    parser.add_argument('-t', '--template', help='template file to process, with keys to replace the value')
+    parser.add_argument('-tft', '--template-file-tag', help='tag on data with the path to a template file to process')
     parser.add_argument('-te', '--template-encoding', help='template file encoding, default=UTF-8', default='UTF-8')
     parser.add_argument('-d', '--data', help='data file to process, with a json array', required=True)
     parser.add_argument('-de', '--data-encoding', help='data file encoding, default=UTF-8', default='UTF-8')
@@ -141,12 +142,14 @@ def main():
 
     args = parser.parse_args()
     
-    template = Template(codecs.open(args.template, READ, args.template_encoding).read())
 
     data = parseData(args)
 
-    output = None
+    template = None
+    if args.template and not args.template_file_tag:
+        template = Template(codecs.open(args.template, READ, args.template_encoding).read())
 
+    output = None
     if args.output and not args.output_file_pattern:
         output = codecs.open(args.output, WRITE, args.output_encoding)
 
@@ -158,8 +161,20 @@ def main():
             else:
                 path = './'
             output = codecs.open(''.join([path, filename]), WRITE, args.output_encoding)
-            
-        write(output, process_template(template, **p), args.iterate)
+
+        if args.template_file_tag:
+            template_file = p.get(args.template_file_tag)
+            if type(template_file) is list:
+                for t in template_file:
+                    template = Template(codecs.open(t, READ, args.template_encoding).read())
+
+                    write(output, process_template(template, **p), args.iterate)    
+            else:
+                template = Template(codecs.open(template_file, READ, args.template_encoding).read())
+
+                write(output, process_template(template, **p), args.iterate)
+        else:
+            write(output, process_template(template, **p), args.iterate)
 
 def parseData(args):
     parsers = {
